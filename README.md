@@ -1,5 +1,7 @@
 URL Shortner
-- Design a URL Shortner service that takes valid URL and returns a shortned version of it which redirects it to the previous URL provided without any delay of intervention.
+- A small project on backend servers using express and handling MongoDB Database to understand the server rendering API Calls and statuscodes.
+- This project is made on a MVC Pattern (Model-Controller-View)
+- Designing a URL Shortner service that takes valid URL and returns a shortned version of it which redirects it to the previous URL provided without any delay or intervention.
 
 Features
 - Keeps track of the total visits/click on the link.
