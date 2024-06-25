@@ -6,7 +6,7 @@ const staticRouter = require("./routes/staticRouter");
 const URL = require("./models/url_DBmodel");
 
 const app = express();
-const PORT = process.env.PORT || 8001;
+const PORT = 8001;
 
 connectToMongoDB("mongodb://127.0.0.1:27017/URL-Shortner");
 
