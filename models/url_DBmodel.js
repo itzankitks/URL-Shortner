@@ -7,12 +7,17 @@ const urlSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    shortenURL: {
+      type: String,
+      default: "",
+    },
     originalURL: {
       type: String,
       required: true,
     },
     clicks: {
       type: Number,
+      default: 0,
     },
     visitHistory: [
       {
