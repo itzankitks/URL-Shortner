@@ -15,9 +15,11 @@ async function handleGenerateNewShortURL(req, res) {
     shortenURL: `http://localhost:8001/url/${shortID}`,
     originalURL: body.url,
     visitHistory: [],
+    createdBy: req.user._id,
   });
-
-  return res.render("home_page", { id: shortID });
+  const currentUser = req.user;
+  const allURLs = await URL.find({  })
+  return res.render("home_page", { id: shortID, user: currentUser });
 }
 
 async function handleGetUrlByID(req, res) {

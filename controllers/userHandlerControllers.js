@@ -1,4 +1,6 @@
+const { v4: uuidv4 } = require("uuid");
 const USER = require("../models/user_DBmodel");
+const { setUser, getUser } = require("../services/auth_service");
 
 async function handleUserSignUp(req, res) {
   if (!req.body) {
@@ -18,16 +20,26 @@ async function handleUserLogIn(req, res) {
     return res.status(400).json({ error: "Some Fields are missing" });
   }
   const { email, password } = req.body;
+
   const user = await USER.findOne({
     email:  email,
     password: password,
   });
+
   if (!user) {
+    // return res.redirect("/login");
     return res.render("logIn_page", {
         error: "Invalid email or password",
     });
   }
-  return res.redirect("/");
+
+  /// no longer use of sessionId as jwt installed will create tokens
+  // const sessionID = uuidv4();
+
+  const token = await setUser(user);
+
+  // res.cookie("uid", token);
+  return res.json({token: token});
 }
 
 module.exports = {
