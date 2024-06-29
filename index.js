@@ -2,7 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const { connectToMongoDB } = require("./services/db_service");
-const { restrictToLoggedInUserOnly, checkAuth } = require("./middlewares/auth_middleware");
+const { checkForAuthentication, restrictTo } = require("./middlewares/auth_middleware");
 
 const URL = require("./models/url_DBmodel");
 
@@ -21,13 +21,14 @@ app.set("views", path.resolve("./views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 // inline middleware.
 // /url can only be accessed by login users if any req on /url first middleware will check if you are logged in or not
 // if yes the urlRoute will be called.
-app.use("/url", restrictToLoggedInUserOnly, urlRoute); 
+app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute); 
 app.use("/user", userRoute);
-app.use("/", checkAuth, staticRoute);
+app.use("/", staticRoute);
 
 app.listen(PORT, () => {
   console.log(`Server Started at PORT: ${PORT}`);

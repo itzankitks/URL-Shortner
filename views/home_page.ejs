@@ -24,27 +24,54 @@
       </form>
     </div>
     <div>
-      <% if (locals.urls) { %>
-        <table>
-          <thead>
-            <th>S. No</th>
-            <th>ShortID</th>
-            <th>Shorten URL</th>
-            <th>Redirect</th>
-            <th>Clicks</th>
-          </thead>
-          <tbody>
-            <% urls.forEach((url, index) => { %>
-              <tr>
-                <td><%= index + 1 %></td>
-                <td><%= url.shortID %></td>
-                <td><%= url.shortenURL %></td>
-                <td><%= url.originalURL %></td>
-                <td><%= url.clicks %></td>
-              </tr>
-            <% }) %>
-          </tbody>
-        </table>
+      <% if (locals.currentUser.role == 'ADMIN') { %>
+        <% if (locals.urls) { %>
+          <table>
+            <thead>
+              <th>S. No</th>
+              <th>ShortID</th>
+              <th>Shorten URL</th>
+              <th>Redirect</th>
+              <th>Clicks</th>
+              <th>UserName</th>
+            </thead>
+            <tbody>
+              <% urls.forEach((url, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= url.shortID %></td>
+                  <td><%= url.shortenURL %></td>
+                  <td><%= url.originalURL %></td>
+                  <td><%= url.clicks %></td>
+                  <td><%= url.createdBy %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      <% } else { %>
+        <% if (locals.urls) { %>
+          <table>
+            <thead>
+              <th>S. No</th>
+              <th>ShortID</th>
+              <th>Shorten URL</th>
+              <th>Redirect</th>
+              <th>Clicks</th>
+            </thead>
+            <tbody>
+              <% urls.forEach((url, index) => { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= url.shortID %></td>
+                  <td><%= url.shortenURL %></td>
+                  <td><%= url.originalURL %></td>
+                  <td><%= url.clicks %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
       <% } %>
     </div>
   </body>

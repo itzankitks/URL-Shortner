@@ -38,8 +38,8 @@ async function handleUserLogIn(req, res) {
 
   const token = await setUser(user);
 
-  // res.cookie("uid", token);
-  return res.json({token: token});
+  res.cookie("token", token);
+  return res.redirect("/");
 }
 
 module.exports = {
